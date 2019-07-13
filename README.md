@@ -6,6 +6,7 @@ DNS Firewall based on Bind and Deteque response policy zones (RPZ)
   
 # Create the root.cache file
 Because this is a recursive nameserver, we'll need to add a root.cache file.  This file should be placed in the /etc/namedb directory. You can download the latest release of that file by running this command on your server:
+
   /usr/bin/wget --user=ftp --password=ftp ftp://ftp.rs.internic.net/domain/db.cache -O /etc/namedb/root.cache
  
 # Create the rndc.conf file
