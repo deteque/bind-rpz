@@ -13,7 +13,7 @@ Because this is a recursive nameserver, we'll need to add a root.cache file.  Th
 # Create the rndc.conf file
 Bind requires a key file for rndc.  This is normally located at /etc/rndc.conf, but since /etc lies within the docker image, the image has a symlink for rndc.conf that points to /etc/namedb/rndc.conf.  You can generate this file by running rndc-confgen if you do not already have that file.  It would be easiest to run that command on another system but if you don't have that option you can run the bind-rpz image in the foreground and generate the file, then cut and paste the contents into the /etc/namedb/rndc.conf file.  Be sure to chmod that file to 600 (read/write by root only).  To log into the container and generate the rndc.conf file use this command:
   docker run -it --rm bind-rpz bash
-  
+<pre>
 The contents of rndc.conf should look something like this:
   \# Start of rndc.conf
   key "rndc-key" {
@@ -26,7 +26,7 @@ The contents of rndc.conf should look something like this:
     default-server 127.0.0.1;
     default-port 953;
   };
-
+</pre>
   
 # Create the named.conf file
 The primary configuration file for Bind is named.conf, which is normally located at /etc/named.conf.  Like the rndc.conf file, a symlink under /etc in the container has been added which will point to /etc/namedb/named.conf.  From within the container, "mostly" configured named.conf can be found at /root/bind/named.conf.  The sample file contains everything needed to get the dns server up and running less two things - the correct rndc secret and host ips in the "masters" section.
