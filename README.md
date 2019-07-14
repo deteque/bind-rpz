@@ -2,7 +2,7 @@
 DNS Firewall based on Bind and Deteque response policy zones (RPZ)
 
 # Installation
-Create two directories on your server: "/etc/namedb" and "/etc/namedb/zonefiles".  The namedb directory will be primariy used to store log and configuraton files.  The /etc/namedb/zonefile directory will be used to store the RPZ zones and joural files.  The /etc/namedb directory will be bind mounted when the container is run.  You can create both directories by:
+Create two directories on your server: "/etc/namedb" and "/etc/namedb/zonefiles".  The namedb directory will be primariy used to store log and configuraton files.  The /etc/namedb/zonefile directory will be used to store the RPZ zones and journal files.  The /etc/namedb directory will be bind mounted when the container is run.  You can create both directories by:
   mkdir -p /etc/namedb/zonefiles"
     
 # Create the root.cache file
