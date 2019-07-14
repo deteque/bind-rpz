@@ -57,7 +57,7 @@ acl LOCAL {
 	172.16.0.0/12;
 	192.168.0.0/16;
 };
-</pre>d  
+</pre>  
 
 Commercial Deteque customers will be provided with necessary masters information.  If you're using an RPZ feed from another vendor you'd add their addresses in that section.  Also note that the example template provided assumes the use of Deteque's RPZ feeds.  If using other feeds the zone names would have to be changed to match those you're pulling from your vendor.
  
