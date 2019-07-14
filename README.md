@@ -46,7 +46,19 @@ You will need to add the addresses of the nameservers that will be providing you
     2.2.2.2;
   };
   </pre>
-  
+
+# Update the Bind ACLS
+To prevent your RPZ enabled server from becoming an open recursive, an access list restricts who can query your servver.  The default config permits only RFC-1918 addresses; you'll need to edit this ACL to include your addresses if the server is direclty connected on the Internet with a public IP.  The current configuration section appears like this:
+<pre>
+acl LOCAL {
+	::1;
+	127.0.0.0/8;
+	10.0.0.0/8;
+	172.16.0.0/12;
+	192.168.0.0/16;
+};
+</pre>d  
+
 Commercial Deteque customers will be provided with necessary masters information.  If you're using an RPZ feed from another vendor you'd add their addresses in that section.  Also note that the example template provided assumes the use of Deteque's RPZ feeds.  If using other feeds the zone names would have to be changed to match those you're pulling from your vendor.
  
 # Starting the bind-rpz service
