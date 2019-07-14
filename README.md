@@ -48,7 +48,7 @@ You will need to add the addresses of the nameservers that will be providing you
   </pre>
 
 # Update the Bind ACLS
-To prevent your RPZ enabled server from becoming an open recursive, an access list restricts who can query your servver.  The default config permits only RFC-1918 addresses; you'll need to edit this ACL to include your addresses if the server is direclty connected on the Internet with a public IP.  The current configuration section appears like this:
+To prevent your RPZ enabled server from becoming an open recursive, an access list restricts who can query your server.  The default config permits only RFC-1918 addresses; you'll need to edit this ACL to include your addresses if the server is direclty connected on the Internet with a public IP.  The current configuration section appears like this:
 <pre>
 acl LOCAL {
 	::1;
