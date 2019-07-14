@@ -47,6 +47,7 @@ You will need to add the addresses of the nameservers that will be providing you
   };
   </pre>
 
+Commercial Deteque customers will be provided with necessary masters information.  If you're using an RPZ feed from another vendor you'd add their addresses in that section.  Also note that the example template provided assumes the use of Deteque's RPZ feeds.  If using other feeds the zone names would have to be changed to match those you're pulling from your vendor.
 # Update the Bind ACLS
 To prevent your RPZ enabled server from becoming an open recursive, an access list restricts who can query your server.  The default config permits only RFC-1918 addresses; you'll need to edit this ACL to include your addresses if the server is directly connected on the Internet with a public IP.  The current configuration section appears like this:
 <pre>
@@ -59,7 +60,6 @@ acl LOCAL {
 };
 </pre>  
 
-Commercial Deteque customers will be provided with necessary masters information.  If you're using an RPZ feed from another vendor you'd add their addresses in that section.  Also note that the example template provided assumes the use of Deteque's RPZ feeds.  If using other feeds the zone names would have to be changed to match those you're pulling from your vendor.
  
 # Starting the bind-rpz service
 If you're running a dual-stack server (a server that supports both IPv4 and IPv6) the easiest way to bring up the docker container is to use the "host" network.  This will insure that your bind logs reflect the correct source ips.  There are several ways you can use to start the bind server, but the easiest would be to use this script:
