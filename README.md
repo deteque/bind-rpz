@@ -71,7 +71,6 @@ If you're running a dual-stack server (a server that supports both IPv4 and IPv6
     --name bind \
     --volume /etc/namedb:/etc/namedb \
     --network host \
-    --restart always \
     deteque/bind-rpz
   </pre>
   Note that /etc/namedb is a bind mount that will "point" at the /etc/namedb directory on your physical server.
