@@ -1,8 +1,8 @@
 FROM debian:buster
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.14.4
+ENV BIND_VERSION 9.14.5
 
-COPY bind-9.14.4.tar.gz /tmp
+COPY bind-${BIND_VERSION}.tar.gz /tmp
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
@@ -29,8 +29,8 @@ RUN mkdir /root/bind \
 		sysstat \
 	&& pip install -U pip \
 	&& apt-get install -y python-ply \
-	&& tar zxvf bind-9.14.4.tar.gz \
-	&& cd bind-9.14.4 \
+	&& tar zxvf bind-${BIND_VERSION}.tar.gz \
+	&& cd bind-${BIND_VERSION}\
 	&& ./configure \
 		--enable-threads \
 		--with-randomdev=/dev/urandom \
