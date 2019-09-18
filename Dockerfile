@@ -1,6 +1,6 @@
 FROM debian:buster
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.14.5
+ENV BIND_VERSION 9.14.6
 
 COPY bind-${BIND_VERSION}.tar.gz /tmp
 
