@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
 ENV BIND_VERSION 9.14.6
 
@@ -27,6 +27,7 @@ RUN mkdir /root/bind \
 		python-pip \
 		sipcalc \
 		sysstat \
+		vim \
 	&& pip install -U pip \
 	&& apt-get install -y python-ply \
 	&& tar zxvf bind-${BIND_VERSION}.tar.gz \
