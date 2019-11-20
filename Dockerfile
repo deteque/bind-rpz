@@ -1,8 +1,6 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.14.7
-
-COPY bind-${BIND_VERSION}.tar.gz /tmp
+ENV BIND_VERSION 9.14.8
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
@@ -28,8 +26,10 @@ RUN mkdir /root/bind \
 		sipcalc \
 		sysstat \
 		vim \
+		wget \
 	&& pip install -U pip \
 	&& apt-get install -y python-ply \
+	&& wget -O bind-${BIND_VERSION}.tar.gz https://downloads.isc.org/isc/bind9/9.14.8/bind-${BIND_VERSION}.tar.gz \
 	&& tar zxvf bind-${BIND_VERSION}.tar.gz \
 	&& cd bind-${BIND_VERSION}\
 	&& ./configure \
