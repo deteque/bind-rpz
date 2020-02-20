@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.14.10
+ENV BIND_VERSION 9.16.0
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
@@ -19,8 +19,10 @@ RUN mkdir /root/bind \
 		libpcap-dev \
 		libreadline-dev \
 		libssl-dev \
+		libuv1-dev \
 		libxml2-dev \
 		net-tools \
+		pkg-config \
 		procps \
 		python-pip \
 		sipcalc \
@@ -29,8 +31,8 @@ RUN mkdir /root/bind \
 		wget \
 	&& pip install -U pip \
 	&& apt-get install -y python-ply \
-	&& wget -O bind-${BIND_VERSION}.tar.gz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.gz \
-	&& tar zxvf bind-${BIND_VERSION}.tar.gz \
+	&& wget -O bind-${BIND_VERSION}.tar.xz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz \
+	&& tar Jxvf bind-${BIND_VERSION}.tar.xz \
 	&& cd bind-${BIND_VERSION}\
 	&& ./configure \
 		--enable-threads \
