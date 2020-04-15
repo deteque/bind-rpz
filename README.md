@@ -13,7 +13,7 @@ Because this is a recursive nameserver, we'll need to add a root.cache file.  Th
 # Create the rndc.conf file
 Bind requires a key file for rndc.  This is normally located at /etc/rndc.conf, but since /etc lies within the docker image, the image has a symlink for rndc.conf that points to /etc/namedb/rndc.conf.  You can generate this file by running rndc-confgen if you do not already have that file.  It would be easiest to run that command on another system but if you don't have that option you can run the bind-rpz image in the foreground and generate the file, then cut and paste the contents into the /etc/namedb/rndc.conf file.  Be sure to chmod that file to 600 (read/write by root only).  To log into the container and generate the rndc.conf file use this command:
 
-  docker run -it --rm bind-rpz bash
+  docker run -it --rm deteque/bind-rpz bash
 <pre>
 The contents of rndc.conf should look something like this:
   # Start of rndc.conf
