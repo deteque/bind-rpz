@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.16.2
+ENV BIND_VERSION 9.16.3
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
