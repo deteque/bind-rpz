@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.16.11
+ENV BIND_VERSION 9.16.12
 ENV BUILD_DATE 2021-02-04
 
 WORKDIR /tmp
