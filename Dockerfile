@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
 ENV BIND_VERSION 9.16.12
-ENV BUILD_DATE 2021-02-04
+ENV BUILD_DATE 2021-03-12
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
@@ -11,8 +11,10 @@ RUN mkdir /root/bind \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 		apt-utils \
 		build-essential \
+		dh-autoreconf \
 		dnstop \
 		ethstats \
+		git \
 		iftop \
 		libcap-dev \
 		libcurl4-openssl-dev \
@@ -31,11 +33,37 @@ RUN mkdir /root/bind \
 		vim \
 		wget \
 	&& pip install -U pip \
-	&& apt-get install -y python-ply \
-	&& wget -O bind-${BIND_VERSION}.tar.xz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz \
+	&& apt-get install -y python-ply
+
+WORKDIR /tmp
+RUN	wget -O /tmp/bind-${BIND_VERSION}.tar.xz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz \
 	&& tar Jxvf bind-${BIND_VERSION}.tar.xz \
-	&& cd bind-${BIND_VERSION}\
+	&& git clone https://github.com/google/protobuf \
+        && git clone https://github.com/protobuf-c/protobuf-c \
+        && git clone https://github.com/farsightsec/fstrm 
+
+WORKDIR /tmp/protobuf
+RUN	autoreconf -i \
 	&& ./configure \
+	&& make \
+	&& make install \
+	&& ldconfig
+
+WORKDIR /tmp/protobuf-c
+RUN	autoreconf -i \
+	&& ./configure \
+	&& make \
+	&&  make install
+
+WORKDIR /tmp/fstrm
+RUN	autoreconf -i \
+ 	&& ./configure \
+ 	&& make \
+ 	&& make install \
+ 	&& ldconfig
+
+WORKDIR /tmp/bind-${BIND_VERSION}
+RUN	./configure \
 		--enable-threads \
 		--with-randomdev=/dev/urandom \
 		--prefix=/usr \
@@ -47,6 +75,7 @@ RUN mkdir /root/bind \
 		--with-aes \
 		--with-libxml2=yes \
 		--with-libjson=no \
+		--enable-dnstap \
 	&& make \
 	&& make install \
 	&& rm -rf /tmp/bind* \
