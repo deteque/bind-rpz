@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
 ENV BIND_VERSION 9.16.18
-ENV BUILD_DATE 2021-06-23
+ENV BUILD_DATE 2021-07-12
 
 WORKDIR /tmp
 RUN mkdir /root/bind \
