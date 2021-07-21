@@ -4,8 +4,7 @@ ENV BIND_VERSION 9.16.19
 ENV BUILD_DATE 2021-07-21-B
 
 WORKDIR /tmp
-RUN mkdir /root/bind \
-	&& apt-get clean \
+RUN apt-get clean \
 	&& apt-get update \
 	&& apt-get -y dist-upgrade \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
@@ -82,13 +81,14 @@ RUN	./configure \
 	&& ln -s /etc/namedb/rndc.conf /etc/rndc.conf \
 	&& ln -s /etc/namedb/named.conf /etc/named.conf \
 	&& sync \
-	&& ldconfig 
+	&& ldconfig \
+	&& mkdir /root/bind
 
-COPY rndc.conf /root/bind
-COPY named.conf /root/bind
-COPY update-root-cache.sh /root/bind
-COPY start-bind.sh /root/bind
-COPY root.cache /root/bind
+COPY rndc.conf /root/bind/
+COPY named.conf /root/bind/
+COPY update-root-cache.sh /root/bind/
+COPY start-bind.sh /root/bind/
+COPY root.cache /root/bind/
 
 EXPOSE 53/tcp 53/udp
 
