@@ -1,7 +1,7 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
 ENV BIND_VERSION 9.16.19
-ENV BUILD_DATE 2021-07-31
+ENV BUILD_DATE 2021-08-15
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -26,7 +26,7 @@ RUN apt-get clean \
 		net-tools \
 		pkg-config \
 		procps \
-		python-pip \
+		python3-pip \
 		sipcalc \
 		sysstat \
 		vim \
