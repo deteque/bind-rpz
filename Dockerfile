@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.16.25
-ENV BUILD_DATE 2022-01-25
+ENV BIND_VERSION 9.18.0
+ENV BUILD_DATE 2022-01-26
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -18,6 +18,7 @@ RUN apt-get clean \
 		libcap-dev \
 		libcurl4-openssl-dev \
 		libevent-dev \
+		libnghttp2-dev \
 		libpcap-dev \
 		libreadline-dev \
 		libssl-dev \
