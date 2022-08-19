@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.18.6
-ENV BUILD_DATE 2022-08-17
+ENV BIND_VERSION 9.18.6.1
+ENV BUILD_DATE 2022-08-19
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -50,41 +50,41 @@ RUN	autoreconf -i \
  	&& make install \
  	&& ldconfig
 
-# WORKDIR /tmp/protobuf-c
-# RUN	autoreconf -i \
-# 	&& ./configure \
-# 	&& make \
-# 	&&  make install
+RKDIR /tmp/protobuf-c
+RUN	autoreconf -i \
+	&& ./configure \
+	&& make \
+	&&  make install
 
-# WORKDIR /tmp/fstrm
-# RUN	autoreconf -i \
-#  	&& ./configure \
-#  	&& make \
-#  	&& make install \
-#  	&& ldconfig
-# 
-# WORKDIR /tmp/bind-${BIND_VERSION}
-# RUN	./configure \
-# 		--enable-threads \
-# 		--with-randomdev=/dev/urandom \
-# 		--prefix=/usr \
-# 		--sysconfdir=/etc \
-# 		--datadir=/etc/namedb \
-# 		--with-openssl=yes \
-# 		--with-tuning=large \
-# 		--enable-largefile \
-# 		--with-aes \
-# 		--with-libxml2=yes \
-# 		--with-libjson=no \
-# 		--enable-dnstap \
-# 	&& make \
-# 	&& make install \
-# 	&& rm -rf /tmp/bind* \
-# 	&& ln -s /etc/namedb/rndc.conf /etc/rndc.conf \
-# 	&& ln -s /etc/namedb/named.conf /etc/named.conf \
-# 	&& sync \
-# 	&& ldconfig \
-# 	&& mkdir /root/bind
+WORKDIR /tmp/fstrm
+RUN	autoreconf -i \
+ 	&& ./configure \
+ 	&& make \
+ 	&& make install \
+ 	&& ldconfig
+
+WORKDIR /tmp/bind-${BIND_VERSION}
+RUN	./configure \
+		--enable-threads \
+		--with-randomdev=/dev/urandom \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--datadir=/etc/namedb \
+		--with-openssl=yes \
+		--with-tuning=large \
+		--enable-largefile \
+		--with-aes \
+		--with-libxml2=yes \
+		--with-libjson=no \
+		--enable-dnstap \
+	&& make \
+	&& make install \
+	&& rm -rf /tmp/bind* \
+	&& ln -s /etc/namedb/rndc.conf /etc/rndc.conf \
+	&& ln -s /etc/namedb/named.conf /etc/named.conf \
+	&& sync \
+	&& ldconfig \
+	&& mkdir /root/bind
 
 COPY rndc.conf /root/bind/
 COPY named.conf /root/bind/
