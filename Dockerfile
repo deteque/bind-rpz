@@ -9,6 +9,7 @@ RUN apt-get clean \
 	&& apt-get -y dist-upgrade \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 		apt-utils \
+		bazel-bootstrap \
 		build-essential \
 		dh-autoreconf \
 		dnstop \
@@ -38,52 +39,52 @@ RUN apt-get clean \
 WORKDIR /tmp
 RUN	wget -O /tmp/bind-${BIND_VERSION}.tar.xz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz \
 	&& tar Jxvf bind-${BIND_VERSION}.tar.xz \
-	&& git clone https://github.com/google/protobuf \
+	&& git clone --branch 21.x https://github.com/google/protobuf \
         && git clone https://github.com/protobuf-c/protobuf-c \
         && git clone https://github.com/farsightsec/fstrm 
 
 WORKDIR /tmp/protobuf
-RUN	autoreconf -i \
-	&& ./configure \
-	&& make \
-	&& make install \
-	&& ldconfig
-
-WORKDIR /tmp/protobuf-c
-RUN	autoreconf -i \
-	&& ./configure \
-	&& make \
-	&&  make install
-
-WORKDIR /tmp/fstrm
 RUN	autoreconf -i \
  	&& ./configure \
  	&& make \
  	&& make install \
  	&& ldconfig
 
-WORKDIR /tmp/bind-${BIND_VERSION}
-RUN	./configure \
-		--enable-threads \
-		--with-randomdev=/dev/urandom \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--datadir=/etc/namedb \
-		--with-openssl=yes \
-		--with-tuning=large \
-		--enable-largefile \
-		--with-aes \
-		--with-libxml2=yes \
-		--with-libjson=no \
-		--enable-dnstap \
-	&& make \
-	&& make install \
-	&& rm -rf /tmp/bind* \
-	&& ln -s /etc/namedb/rndc.conf /etc/rndc.conf \
-	&& ln -s /etc/namedb/named.conf /etc/named.conf \
-	&& sync \
-	&& ldconfig \
-	&& mkdir /root/bind
+# WORKDIR /tmp/protobuf-c
+# RUN	autoreconf -i \
+# 	&& ./configure \
+# 	&& make \
+# 	&&  make install
+
+# WORKDIR /tmp/fstrm
+# RUN	autoreconf -i \
+#  	&& ./configure \
+#  	&& make \
+#  	&& make install \
+#  	&& ldconfig
+# 
+# WORKDIR /tmp/bind-${BIND_VERSION}
+# RUN	./configure \
+# 		--enable-threads \
+# 		--with-randomdev=/dev/urandom \
+# 		--prefix=/usr \
+# 		--sysconfdir=/etc \
+# 		--datadir=/etc/namedb \
+# 		--with-openssl=yes \
+# 		--with-tuning=large \
+# 		--enable-largefile \
+# 		--with-aes \
+# 		--with-libxml2=yes \
+# 		--with-libjson=no \
+# 		--enable-dnstap \
+# 	&& make \
+# 	&& make install \
+# 	&& rm -rf /tmp/bind* \
+# 	&& ln -s /etc/namedb/rndc.conf /etc/rndc.conf \
+# 	&& ln -s /etc/namedb/named.conf /etc/named.conf \
+# 	&& sync \
+# 	&& ldconfig \
+# 	&& mkdir /root/bind
 
 COPY rndc.conf /root/bind/
 COPY named.conf /root/bind/
