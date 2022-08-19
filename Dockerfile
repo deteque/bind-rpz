@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-ENV BIND_VERSION 9.18.6.1
-ENV BUILD_DATE 2022-08-19
+ENV BIND_VERSION 9.18.6
+ENV BUILD_DATE 2022-08-19.2
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -50,7 +50,7 @@ RUN	autoreconf -i \
  	&& make install \
  	&& ldconfig
 
-RKDIR /tmp/protobuf-c
+WORKDIR /tmp/protobuf-c
 RUN	autoreconf -i \
 	&& ./configure \
 	&& make \
