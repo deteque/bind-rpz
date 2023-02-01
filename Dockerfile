@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-01-25"
+LABEL build_date="2023-02-01"
 ENV BIND_VERSION 9.18.11
 
 WORKDIR /tmp
