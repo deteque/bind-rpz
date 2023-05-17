@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-04-27"
-ENV BIND_VERSION 9.18.14
+LABEL build_date="2023-05-17"
+ENV BIND_VERSION 9.18.15
 
 WORKDIR /tmp
 RUN apt-get clean \
