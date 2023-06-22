@@ -1,7 +1,7 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-06-13"
-ENV BIND_VERSION 9.18.15
+LABEL build_date="2023-06-22"
+ENV BIND_VERSION 9.18.16
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -15,7 +15,6 @@ RUN apt-get clean \
 		dnstop \
 		ethstats \
 		git \
-		iftop \
 		libcap-dev \
 		libcurl4-openssl-dev \
 		libevent-dev \
@@ -29,12 +28,13 @@ RUN apt-get clean \
 		pkg-config \
 		procps \
 		python3-pip \
+		python3-ply \
 		sipcalc \
 		sysstat \
 		vim \
-		wget \
-	&& pip install -U pip \
-	&& apt-get install -y python-ply
+		wget 
+
+# RUN	pip install -U pip
 
 WORKDIR /tmp
 RUN	wget -O /tmp/bind-${BIND_VERSION}.tar.xz https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz \
