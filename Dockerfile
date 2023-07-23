@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-07-11"
+LABEL build_date="2023-07-23"
 ENV BIND_VERSION 9.18.17
 
 WORKDIR /tmp
@@ -33,6 +33,7 @@ RUN apt-get clean \
 		libssl-dev \
 		libuv1-dev \
 		libxml2-dev \
+		libnghttp2-dev \
 		locate \
 		lsb-release \
 		net-tools \
