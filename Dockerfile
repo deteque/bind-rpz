@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-09-20"
+LABEL build_date="2023-10-02"
 ENV BIND_VERSION 9.18.19
 
 WORKDIR /tmp
