@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
-LABEL maintainer="Andrew Fried <afried@deteque.com>"
-LABEL build_date="2023-11-23"
-ENV BIND_VERSION 9.18.20
+LABEL maintainer="Deteque <admin-deteque@spamhaus.com>"
+LABEL build_date="2024-01-05"
+ENV BIND_VERSION 9.18.21
 
 WORKDIR /tmp
 RUN apt-get clean \
