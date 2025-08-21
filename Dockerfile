@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 LABEL maintainer="Deteque <admin-deteque@spamhaus.com>"
-LABEL build_date="2025-06-06"
-ENV BIND_VERSION 9.18.37
+LABEL build_date="2025-08-21"
+ENV BIND_VERSION 9.20.12
 
 WORKDIR /tmp
 RUN apt-get clean \
@@ -9,6 +9,9 @@ RUN apt-get clean \
 	&& apt-get -y dist-upgrade \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 		apt-transport-https \
+		libjson-c-dev \
+		liburcu-dev \
+		libjemalloc-dev \
 		apt-utils \
 		bazel-bootstrap \
 		bison \
@@ -67,8 +70,9 @@ RUN	./configure \
 		--with-tuning=large \
 		--enable-largefile \
 		--with-aes \
-		--with-libxml2=yes \
-		--with-libjson=no \
+		--with-libxml2 \
+		--with-json-c \
+		--with-jemalloc=detect \
 		--enable-dnstap \
 	&& make \
 	&& make install \
